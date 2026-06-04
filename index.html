@@ -554,6 +554,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="pDistrictSelect" style="color: var(--neon-blue); font-weight: bold;">🏫 Active Institutional Tenant Node:</label>
+                                
                                 <select id="pDistrictSelect" required></select>
                             </div>
                             <div class="form-group">
@@ -571,7 +572,6 @@
                                 <div class="match-slot"><span>Match 4</span><select id="pMatch4"><option value="Starter">Starter</option><option value="Substitute">Sub</option></select></div>
                             </div>
                         </div>
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="pDOB">Date of Birth:</label>
@@ -827,7 +827,9 @@
             { id: "PL-1005", name: "Akello Grace", district: "Muhanga Vocational Inst.", group: "Group E", dob: "2009-01-19", age: 17, division: "Under-17", tier: "Tier-1 (Elite)", status: "PENDING", lineups: ["Starter", "Starter", "Substitute", "Substitute"], avatar: "👤", timestamp: "2026-06-04 16:20:10" }
         ];
 
-        function executeTenantHandshake() {
+        function executeTenantHandshake() 
+        const key = document.getElementById('tenantSecretKey').value;
+    const select = document.getElementById('pDistrictSelect');
             const tokenInput = document.getElementById("tenantSecretKey").value.trim();
             if (REGISTERED_TENANTS[tokenInput]) {
                 activeTenantKey = tokenInput;
@@ -1204,6 +1206,8 @@
             localStorage.setItem('tenantRoster', JSON.stringify(roster));
             // Trigger your existing display refresh function here
             renderLocalLedgerGrid(); 
+           // Look for where you build your list and add:
+`<button onclick="deletePlayer('${player.name}')">Delete</button>` 
         }
     }
 
