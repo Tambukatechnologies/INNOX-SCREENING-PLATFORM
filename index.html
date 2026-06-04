@@ -1161,5 +1161,28 @@
             tbody.innerHTML = rows || `<tr><td colspan="5" style="text-align:center; padding:20px;">No institutional entries match parameters.</td></tr>`;
         }
     </script>
+    <script>
+    // 1. The Master School List
+    const tenantRegistry = {
+        "SCHOOL_RUKIGA_HIGH": "Rukiga High School",
+        "SCHOOL_ST_MARYS": "St. Mary's Academy",
+        "SCHOOL_MUHANGA_PRG": "Muhanga Progressive",
+        "SCHOOL_KABALE_TRIN": "Kabale Trinity School",
+        "SCHOOL_MUHANGA_VOC": "Muhanga Vocational Inst."
+    };
+
+    // 2. The function that connects the Auth to the Form
+    function updateSchoolSelection(key) {
+        const districtSelect = document.getElementById('pDistrictSelect');
+        if (tenantRegistry[key]) {
+            districtSelect.innerHTML = ''; // Clear existing
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = tenantRegistry[key];
+            districtSelect.appendChild(option);
+            districtSelect.disabled = true; // LOCKS THE SELECTION
+        }
+    }
+</script>
 </body>
 </html>
