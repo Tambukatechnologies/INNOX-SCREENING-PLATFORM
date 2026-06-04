@@ -1187,40 +1187,6 @@
     }
 </script>
     <script>
-    // --- NEW LOGIC START ---
-    
-    // 1. The Registry (Keeps your school list)
-    const tenantRegistry = {
-        "SCHOOL_RUKIGA_HIGH": "Rukiga High School",
-        "SCHOOL_ST_MARYS": "St. Mary's Academy",
-        "SCHOOL_MUHANGA_PRG": "Muhanga Progressive",
-        "SCHOOL_KABALE_TRIN": "Kabale Trinity School",
-        "SCHOOL_MUHANGA_VOC": "Muhanga Vocational Inst."
-    };
-
-    // 2. The Delete Function (Keeps your data clean)
-    function deletePlayer(playerName) {
-        if(confirm("Confirm: Delete " + playerName + " from the ledger?")) {
-            let roster = JSON.parse(localStorage.getItem('tenantRoster') || '[]');
-            roster = roster.filter(p => p.name !== playerName);
-            localStorage.setItem('tenantRoster', JSON.stringify(roster));
-            // Trigger your existing display refresh function here
-            renderLocalLedgerGrid(); 
-           // Look for where you build your list and add:
-        }
-    }
-
-    // 3. Manager Password (For your Multi-Tenancy Manager)
-    function verifyManagerAccess() {
-        const pass = document.getElementById('managerPassword').value;
-        if (pass === "ADMIN123") { // Change this to your password
-            document.getElementById('managerContent').style.display = 'block';
-        } else {
-            alert("Incorrect Password");
-        }
-    }
-
-    // --- NEW LOGIC END ---
 </script>
 </body>
 </html>
