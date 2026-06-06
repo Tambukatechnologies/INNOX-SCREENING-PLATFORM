@@ -498,7 +498,7 @@
         </header>
 
         <!-- 1. MULTI-SCHOOL SECURE AUTH GATEWAY -->
-        <div id="adminAuthGateway" class="view-panel active-view" style="margin-bottom:0;">
+        <div id="adminAuthGateway" class="view-panel active-view">
             <div class="auth-lockscreen">
                 <h3 style="color: var(--neon-blue); margin-bottom:10px;">🏫 Multi-Tenant Institutional Portal Access</h3>
                 <p style="color: var(--text-dimmed); max-width: 500px; margin-bottom: 10px;">Enter your school's unique workspace access token keyspace. Peer data streams remain fully blind to other schools.</p>
@@ -746,7 +746,7 @@
                             <thead>
                                 <tr><th>Student Athlete Profile</th><th>Assigned Group Matrix</th><th>School Domain Node</th><th>Temporal Matrix</th><th>Status</th></tr>
                             </thead>
-                            <tbody id="federationTableBody"></tbody>
+                            </tbody> id="federationTableBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -1173,25 +1173,36 @@
         "SCHOOL_MUHANGA_VOC": "Muhanga Vocational Inst."
     };
 
-    // 2. The function that connects the Auth to the Form
-    function updateSchoolSelection(key) {
-        const districtSelect = document.getElementById('pDistrictSelect');
-        if (tenantRegistry[key]) {
-            districtSelect.innerHTML = ''; // Clear existing
-            const option = document.createElement('option');
-            option.value = key;
-            option.textContent = tenantRegistry[key];
-            districtSelect.appendChild(option);
-            districtSelect.disabled = true; // LOCKS THE SELECTION
-        }
+   function executeTenantHandshake() {
+    const tokenInput = document.getElementById("tenantSecretKey").value.trim();
+
+    if (REGISTERED_TENANTS[tokenInput]) {
+        activeTenantKey = tokenInput;
+        activeTenantDomain = REGISTERED_TENANTS[tokenInput].name;
+
+        document.getElementById("identityBannerContext").textContent =
+            `Active Institution Matrix: ${activeTenantDomain}`;
+
+        document.getElementById("tenantStatusIdentity").textContent =
+            activeTenantDomain;
+
+        document.getElementById("ledgerSchoolTitle").textContent =
+            activeTenantDomain;
+
+        document.getElementById("adminAuthGateway").style.display = "none";
+        document.getElementById("masterOperationsBase").style.display = "block";
+
+        initializeTenantDropdownConfigurations();
+        renderLocalLedgerGrid();
+        syncScreeningDropdown();
+    } else {
+        alert("CRITICAL SECURITY VIOLATION: Unknown School Tenancy Access Key.");
     }
-    <script>
-      <script>
+}
       {function executeTenantHandshake() {
         alert("The function is working!");
         console.log("Handshake reached.");
-    }
-</script>  
+    } 
 </script>
 </body>
 </html>
